@@ -4,10 +4,12 @@
 Copy and paste this script into a Google Cloud Apps Script project at https://script.google.com
 
 
-You will need a Discord Webhook URL and the Calendar ID for the Google Calendar to get events from
+You will need to replace  `CHANNEL_POST_URL` and `CALENDAR_ID` in the script with your [Discord Webhook URL](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) and your Google Calendar's [Calendar ID](https://docs.simplecalendar.io/find-google-calendar-id/) respectively.
 
 You Will then need to setup a trigger to run the `postEventsToChannel` function every minute
 ![image](https://user-images.githubusercontent.com/68816695/133913045-da937bd5-c53f-4028-af5b-22874df2e798.png)
 
 You should see any events that will start within the next minute posted into an embed into the discord channel your webhook was on
+
+
 ![image](https://user-images.githubusercontent.com/68816695/133913037-00a74fa2-0bf7-4652-9b83-cd9a4efa4b15.png)
