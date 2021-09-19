@@ -10,3 +10,4 @@ You Will then need to setup a trigger to run the `postEventsToChannel` function 
 ![image](https://user-images.githubusercontent.com/68816695/133912945-f065cbcb-5a59-46f8-a3ad-e98412ec9b82.png)
 
 You should see any events that will start within the next minute posted into an embed into the discord channel your webhook was on
+![image](https://user-images.githubusercontent.com/68816695/133913037-00a74fa2-0bf7-4652-9b83-cd9a4efa4b15.png)
