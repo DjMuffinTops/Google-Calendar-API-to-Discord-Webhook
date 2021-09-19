@@ -11,7 +11,7 @@ eval(UrlFetchApp.fetch('https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/lu
 let DateTime = luxon.DateTime;
 const DTnow = DateTime.now().startOf('minute'); // Will consider 'now' as the beginning the minute to deal with second offsets issues with trigger over time.
 
-function postCalendarToAdminChannel() {
+function postEventsToAdminChannel() {
   // .list parameters. See https://developers.google.com/calendar/api/v3/reference/events/list?hl=en
   let optionalArgs = {
     timeMin: DTnow.toISO(),
