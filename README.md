@@ -6,6 +6,9 @@ Copy and paste this script into a Google Cloud Apps Script project at https://sc
 
 You will need to replace  `CHANNEL_POST_URL` and `CALENDAR_ID` in the script with your [Discord Webhook URL](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks) and your Google Calendar's [Calendar ID](https://docs.simplecalendar.io/find-google-calendar-id/) respectively.
 
+Then, you must enabled Calendar API under Services on the left side of the Apps Script Page. Click the + button next to Services and look for Calendar API and enable it. v3 of the Calendar API should work fine.
+
+
 You Will then need to setup a trigger to run the `postEventsToChannel` function every minute
 ![image](https://user-images.githubusercontent.com/68816695/133913045-da937bd5-c53f-4028-af5b-22874df2e798.png)
 
