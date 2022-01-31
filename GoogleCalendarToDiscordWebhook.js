@@ -11,11 +11,12 @@ eval(UrlFetchApp.fetch('https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/lu
 let DateTime = luxon.DateTime;
 const DTnow = DateTime.now().startOf('minute'); // Will consider 'now' as the beginning the minute to deal with second offsets issues with trigger over time.
 
+const minsInAdvance = 1; // Must be 1 or greater
 function postEventsToChannel() {
   // .list parameters. See https://developers.google.com/calendar/api/v3/reference/events/list?hl=en
   let optionalArgs = {
     timeMin: DTnow.toISO(),
-    timeMax: DTnow.plus({minutes: 1}).toISO(), // Will only show events starting in the next minute
+    timeMax: DTnow.plus({minutes: minsInAdvance}).toISO(), // Will only show events starting in the next x minutes
     showDeleted: false,
     singleEvents: true,
     orderBy: 'startTime'
@@ -30,7 +31,7 @@ function postEventsToChannel() {
 
       // The Calendar API's .list function will continously return events whose endDate has not been reached yet (timeMin is based on the event's end time)
       // Since this script is meant to run every minute, we have to skip these events ourselves
-      if (DateTime.fromISO(ISOStartDate) < DTnow) {
+      if (DateTime.fromISO(ISOStartDate) < DTnow.plus({minutes: minsInAdvance - 1})) {
         Logger.log(`Event ${event.summary} [${event.id}] has already started. Skipping`);
         continue;
       }
