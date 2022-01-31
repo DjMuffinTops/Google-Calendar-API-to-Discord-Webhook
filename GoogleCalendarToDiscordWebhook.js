@@ -4,6 +4,7 @@
 const CHANNEL_POST_URL = "DISCORD_WEBHOOK_LINK_GOES_HERE"; 
 const CALENDAR_ID = "GOOGLE_CALENDAR_ID_GOES_HERE";
 const NO_VALUE_FOUND = "N/A";
+const minsInAdvance = 1; // Set the number of minutes in advance you'd like events to be posted to discord. Must be 1 or greater
 
 
 // Import Luxon
@@ -15,7 +16,7 @@ function postEventsToChannel() {
   // .list parameters. See https://developers.google.com/calendar/api/v3/reference/events/list?hl=en
   let optionalArgs = {
     timeMin: DTnow.toISO(),
-    timeMax: DTnow.plus({minutes: 1}).toISO(), // Will only show events starting in the next minute
+    timeMax: DTnow.plus({minutes: minsInAdvance}).toISO(), // Will only show events starting in the next x minutes
     showDeleted: false,
     singleEvents: true,
     orderBy: 'startTime'
@@ -30,7 +31,7 @@ function postEventsToChannel() {
 
       // The Calendar API's .list function will continously return events whose endDate has not been reached yet (timeMin is based on the event's end time)
       // Since this script is meant to run every minute, we have to skip these events ourselves
-      if (DateTime.fromISO(ISOStartDate) < DTnow) {
+      if (DateTime.fromISO(ISOStartDate) < DTnow.plus({minutes: minsInAdvance - 1})) {
         Logger.log(`Event ${event.summary} [${event.id}] has already started. Skipping`);
         continue;
       }
@@ -80,7 +81,7 @@ function postEventsToChannel() {
       UrlFetchApp.fetch(CHANNEL_POST_URL, options);
     }
   } else {
-    Logger.log('No events starting within the minute found.');
+    Logger.log(`No events starting within ${minsInAdvance} minute(s) found.`);
   }
 }
 
