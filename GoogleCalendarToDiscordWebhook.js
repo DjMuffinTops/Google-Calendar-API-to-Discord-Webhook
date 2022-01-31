@@ -4,6 +4,7 @@
 const CHANNEL_POST_URL = "DISCORD_WEBHOOK_LINK_GOES_HERE"; 
 const CALENDAR_ID = "GOOGLE_CALENDAR_ID_GOES_HERE";
 const NO_VALUE_FOUND = "N/A";
+const minsInAdvance = 1; // Set the number of minutes in advance you'd like events to be posted to discord. Must be 1 or greater
 
 
 // Import Luxon
@@ -11,7 +12,6 @@ eval(UrlFetchApp.fetch('https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/lu
 let DateTime = luxon.DateTime;
 const DTnow = DateTime.now().startOf('minute'); // Will consider 'now' as the beginning the minute to deal with second offsets issues with trigger over time.
 
-const minsInAdvance = 1; // Must be 1 or greater
 function postEventsToChannel() {
   // .list parameters. See https://developers.google.com/calendar/api/v3/reference/events/list?hl=en
   let optionalArgs = {
