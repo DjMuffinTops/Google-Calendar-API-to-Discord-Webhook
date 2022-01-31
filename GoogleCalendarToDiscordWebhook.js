@@ -81,7 +81,7 @@ function postEventsToChannel() {
       UrlFetchApp.fetch(CHANNEL_POST_URL, options);
     }
   } else {
-    Logger.log('No events starting within the minute found.');
+    Logger.log(`No events starting within ${minsInAdvance} minute(s) found.`);
   }
 }
 
